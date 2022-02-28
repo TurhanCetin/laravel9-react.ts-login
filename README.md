@@ -63,3 +63,5 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # laravel9-login-api-with-docker
+
+Tek docker-compose ile beraber hem react hem de laravel9 projeleri ayağa kalkan bir login api uygulamasıdır.
