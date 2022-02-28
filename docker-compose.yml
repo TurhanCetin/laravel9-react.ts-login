@@ -1,5 +1,20 @@
 version: '3.7'
 services:
+    frontend:
+        build:
+            context: ./login-api-frontend
+            dockerfile: /home/p2065/laravelprojeler/laravel9-login-api-example/login-api-frontend/docker/Dockerfile
+            args:
+                - NODE_ENV=development
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./login-api-frontend:/opt/app
+            - ./login-api-frontend/package.json:/opt/package.json
+        environment:
+            - NODE_ENV=development
+        command:
+            -   npm start
     #PHP Service
     app:
         build:
