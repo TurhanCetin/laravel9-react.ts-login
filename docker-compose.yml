@@ -10,8 +10,8 @@ services:
         ports:
             - "3000:3000"
         volumes:
-            - ./frontend:/opt/app
-            - ./frontend/package.json:/opt/package.json
+            - ./frontend:/usr/src/app
+            - ./frontend/package.json:/usr/src/package.json
         environment:
             - NODE_ENV=development
     #PHP Service
