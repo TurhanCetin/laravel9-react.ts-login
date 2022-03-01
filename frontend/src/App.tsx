@@ -1,12 +1,14 @@
-import React from 'react';
-import HelloWorld from "./HelloWorld";
+import React from 'react'
 import './App.css';
+import Layout from "./Components/Layout/Layout";
+import Header from "./Components/Header/Header";
 
 function App() {
   return (
-    <div className="App">
-        <HelloWorld></HelloWorld>
-    </div>
+        <Layout>
+            <Header/>
+            <div>Hello</div>
+        </Layout>
   );
 }
 
