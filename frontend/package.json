@@ -22,12 +22,19 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "devdependencies":{
+    "html-loader": "1.0.0-alpha.0"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
   },
+  "eslintignore": [
+    "node_modules",
+    "build/*"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
