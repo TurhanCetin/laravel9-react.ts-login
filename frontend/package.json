@@ -10,6 +10,7 @@
     "@types/node": "16.11.26",
     "@types/react": "17.0.39",
     "@types/react-dom": "17.0.13",
+    "antd": "^4.19.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
@@ -22,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "devdependencies":{
+  "devdependencies": {
     "html-loader": "1.0.0-alpha.0"
   },
   "eslintConfig": {
@@ -31,7 +32,7 @@
       "react-app/jest"
     ]
   },
-  "eslintignore": [
+  "eslintIgnore": [
     "node_modules",
     "build/*"
   ],
