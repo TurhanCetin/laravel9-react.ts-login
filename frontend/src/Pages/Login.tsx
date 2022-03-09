@@ -17,15 +17,17 @@ const Login = () => {
     return(
         <div>
             <Row>
-                <Col span={12} offset={4}>
-                    <Form
-                        name="basic"
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
+                <Col span={12} offset={6}>
+                    <Form 
+                        id="loginForm"
+                        name="login_form"
+                        labelCol={{ span: 4 }}
+                        wrapperCol={{ span: 18 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
+                        style={{ backgroundColor: '#13c2c2' }}
                         >
                         <Form.Item
                         label="Name"
@@ -55,7 +57,7 @@ const Login = () => {
 
                         <Form.Item
                         label="Password Again"
-                        name="password"
+                        name="passwordAgain"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                         >
                         <Input.Password
@@ -63,7 +65,7 @@ const Login = () => {
                         />
                         </Form.Item>
 
-                        <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+                        <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 4, span: 16 }}>
                         <Checkbox>Remember me</Checkbox>
                         </Form.Item>
 
