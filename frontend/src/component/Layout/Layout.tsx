@@ -1,30 +1,42 @@
 import React from "react";
-import { Row, Col } from 'antd';
+import { Row, Col, Tabs } from 'antd';
 import { Header } from "antd/lib/layout/layout";
 import Title from "antd/lib/typography/Title";
 
 interface ILoyout{
-    children: Array<JSX.Element>| JSX.Element;
+    childLogin: Array<JSX.Element>| JSX.Element;
+    childSignup: Array<JSX.Element>| JSX.Element;
+    key?:String
 }
 
-const Layout: React.FC<ILoyout> = ({children}) => {
+const Layout: React.FC<ILoyout> = ({childLogin,childSignup ,key}) => {
 
+  const {TabPane} = Tabs;
+
+  const callback = () => {
+    console.log(key);
+  }
 
     return(
   
      <Header>
-       <Row>
-        <Col offset={11} >
           <Title 
             style={{ color: '#fff' }}>
             Log In
           </Title>
-        </Col>
-       </Row>
-        <Row>
-          <Col span={12} offset={6}>
-            {children}
+        <Row gutter={16}>
+          <Col span={8}/>
+          <Col span={8}>
+              <Tabs defaultActiveKey="Tab 1"onChange={callback}>
+                <TabPane tab="Login" key="1">
+                  {childLogin}
+                </TabPane>
+                <TabPane tab="Sign Up" key="2">
+                  {childSignup}
+                </TabPane>
+              </Tabs>         
           </Col>
+          <Col span={8}/>
         </Row>
     </Header>
     

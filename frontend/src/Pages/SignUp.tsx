@@ -4,7 +4,7 @@ import { Input,Button,Form,Checkbox } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 
-const Login = () => {
+const SignUp = () => {
 
     const onFinish = (values: any) => {
         console.log('Success:', values);
@@ -23,6 +23,15 @@ const Login = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             >
+            <Form.Item
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: 'Please input your name' }]}
+            wrapperCol={{ offset:3, span: 24 }}
+            >
+            <Input />
+            </Form.Item>
+
             <Form.Item
             label="Email"
             name="email"
@@ -43,6 +52,17 @@ const Login = () => {
             />
             </Form.Item>
 
+            <Form.Item
+            label="Password Again"
+            name="passwordAgain"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+            wrapperCol={{ offset:1, span: 24 }}
+            >
+            <Input.Password
+            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            />
+            </Form.Item>
+
             <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 4, span: 16 }}>
             <Checkbox>Remember me</Checkbox>
             </Form.Item>
@@ -56,4 +76,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default SignUp
