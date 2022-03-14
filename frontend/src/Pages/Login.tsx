@@ -3,6 +3,7 @@ import { Input,Button,Form,Checkbox } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
 
@@ -17,7 +18,25 @@ const Login = () => {
         axios.get( csrfBaseUrl + 'sanctum/csrf-cookie').then(response => {
             //ardından login işlemini burada gerçekleştireceğiz.
             axios.post(baseUrl + 'login', e).then(res => {
-                navigate("/");
+                if(res.status === 201){
+                    Swal.fire({
+                        title:"Welcome",
+                        icon:"success",
+                        text:"Login Successfully",
+                        timer: 2000,
+                    })
+                    navigate("/");  
+                    console.log("yukardaki çalıştı");
+                }else{
+                    console.log(res.status);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Email or password is incorrect',
+                        icon: 'error',
+                        confirmButtonText:'Try Again',
+                    });
+                    console.log("aşağıdaki çalıştı");
+                }
             })
         });
       };
