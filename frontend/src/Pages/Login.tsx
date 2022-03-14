@@ -1,14 +1,14 @@
 import React from "react";
 import { Input,Button,Form,Checkbox } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
 
 const Login = () => {
 
     const csrfBaseUrl = 'http://localhost/';
     const baseUrl = 'http://localhost/api/';
+    const navigate = useNavigate();
 
     const onFinish = (e:React.FormEvent<HTMLFormElement>) => {
         // Cors hatasını atlatmak için bu işlemleri gerçekleştiriyoruz.
@@ -17,7 +17,7 @@ const Login = () => {
         axios.get( csrfBaseUrl + 'sanctum/csrf-cookie').then(response => {
             //ardından login işlemini burada gerçekleştireceğiz.
             axios.post(baseUrl + 'login', e).then(res => {
-                console.log(res.data); 
+                navigate("/");
             })
         });
       };
