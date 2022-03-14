@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\Console\Event\ConsoleEvent;
 
 class UserController extends Controller
 {
@@ -111,11 +112,12 @@ class UserController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if(!$user || $request->password == $user->password) {
+        if(!$user || $request->password_ != $user->password) {
             return new JsonResponse([
                 "message" => "Bad Creds"
             ],401);
         }
+
 
         $token = $user->createToken('myappToken')->plainTextToken;
 

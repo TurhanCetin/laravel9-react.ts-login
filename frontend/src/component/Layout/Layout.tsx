@@ -18,28 +18,26 @@ const Layout: React.FC<ILoyout> = ({childLogin,childSignup ,key}) => {
   }
 
     return(
-  
-     <Header>
-          <Title 
-            style={{ color: '#fff' }}>
-            Log In
-          </Title>
-        <Row gutter={16}>
-          <Col span={8}/>
-          <Col span={8}>
-              <Tabs defaultActiveKey="Tab 1"onChange={callback}>
-                <TabPane tab="Login" key="1">
-                  {childLogin}
-                </TabPane>
-                <TabPane tab="Sign Up" key="2">
-                  {childSignup}
-                </TabPane>
-              </Tabs>         
-          </Col>
-          <Col span={8}/>
-        </Row>
-    </Header>
-    
+        <Header>
+            <Title 
+              style={{ color: '#fff' }}>
+              Log In
+            </Title>
+          <Row gutter={16}>
+            <Col span={8}/>
+            <Col span={8}>
+                <Tabs defaultActiveKey="Tab 1"onChange={callback}>
+                  <TabPane tab="Login" key="1">
+                    {childLogin}
+                  </TabPane>
+                  <TabPane tab="Sign Up" key="2">
+                    {childSignup}
+                  </TabPane>
+                </Tabs>         
+            </Col>
+            <Col span={8}/>
+          </Row>
+      </Header>
     )
 
 }

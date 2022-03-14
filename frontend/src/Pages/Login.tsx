@@ -1,13 +1,25 @@
 import React from "react";
 import { Input,Button,Form,Checkbox } from 'antd';
-// import { DownloadOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import axios from "axios";
+
 
 
 const Login = () => {
 
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const csrfBaseUrl = 'http://localhost/';
+    const baseUrl = 'http://localhost/api/';
+
+    const onFinish = (e:React.FormEvent<HTMLFormElement>) => {
+        // Cors hatasını atlatmak için bu işlemleri gerçekleştiriyoruz.
+        axios.defaults.withCredentials = true; 
+        
+        axios.get( csrfBaseUrl + 'sanctum/csrf-cookie').then(response => {
+            //ardından login işlemini burada gerçekleştireceğiz.
+            axios.post(baseUrl + 'login', e).then(res => {
+                console.log(res.data); 
+            })
+        });
       };
     
       const onFinishFailed = (errorInfo: any) => {
@@ -34,7 +46,7 @@ const Login = () => {
 
             <Form.Item
             label="Password"
-            name="password"
+            name="password_"
             rules={[{ required: true, message: 'Please input your password!' }]}
             wrapperCol={{ offset:2, span: 24 }}
             >

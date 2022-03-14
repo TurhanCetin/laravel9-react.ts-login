@@ -29,6 +29,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true, // React'tan api'a istek atarken bunu true hale getirip csrf-cookie adresine istek atarak cors'u atlatıyoruz.
 
 ];

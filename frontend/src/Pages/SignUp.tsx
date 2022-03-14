@@ -1,6 +1,5 @@
 import React from "react";
 import { Input,Button,Form,Checkbox } from 'antd';
-// import { DownloadOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 
