@@ -4,6 +4,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import axiosinstence from '../axiosInstence'
 
 const Login = () => {
 
@@ -11,35 +12,36 @@ const Login = () => {
     const baseUrl = 'http://localhost/api/';
     const navigate = useNavigate();
 
-    const onFinish = (e:React.FormEvent<HTMLFormElement>) => {
+    const onFinish = async (e:React.FormEvent<HTMLFormElement>) => {
         // Cors hatasını atlatmak için bu işlemleri gerçekleştiriyoruz.
         axios.defaults.withCredentials = true; 
         
-        axios.get( csrfBaseUrl + 'sanctum/csrf-cookie').then(response => {
+        try {
+            await axiosinstence.get( csrfBaseUrl + 'sanctum/csrf-cookie')
             //ardından login işlemini burada gerçekleştireceğiz.
-            axios.post(baseUrl + 'login', e).then(res => {
-                if(res.status === 201){
-                    Swal.fire({
-                        title:"Welcome",
-                        icon:"success",
-                        text:"Login Successfully",
-                        timer: 2000,
-                    })
-                    navigate("/");  
-                    console.log("yukardaki çalıştı");
-                }else{
-                    console.log(res.status);
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Email or password is incorrect',
-                        icon: 'error',
-                        confirmButtonText:'Try Again',
-                    });
-                    console.log("aşağıdaki çalıştı");
-                }
-            })
-        });
-      };
+            await axiosinstence.post(baseUrl + 'login', e)
+                    
+                Swal.fire({
+                    title:"Welcome",
+                    icon:"success",
+                    text:"Login Successfully",
+                    timer: 2000,
+                })
+                navigate("/");  
+                console.log("yukardaki çalıştı");
+            
+        } catch(err) {
+            console.log('err from catch', err);
+            
+            Swal.fire({
+                title: 'Error!',
+                text: 'Email or password is incorrect',
+                icon: 'error',
+                confirmButtonText:'Try Again',
+            });
+            console.log("aşağıdaki çalıştı");
+        }
+    };
     
       const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
