@@ -7,11 +7,9 @@ COPY package-lock.json ./
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-
-RUN npm install
-
-COPY . .
+COPY ./docker/entrypoint-dev /usr/local/bin/
 
 EXPOSE 8083
 
-CMD [ "npm", "start" ]
+RUN chmod +x /usr/local/bin/entrypoint-dev
+ENTRYPOINT [ "entrypoint-dev" ] 

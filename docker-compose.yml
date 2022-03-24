@@ -4,7 +4,7 @@ services:
     frontend:
         build:
             context: ./frontend
-            dockerfile: /home/p2065/laravelprojeler/laravel9-login-api-example/frontend/docker/Dockerfile
+            dockerfile: ./docker/Dockerfile
             args:
                 - NODE_ENV=development
         ports:
@@ -18,7 +18,7 @@ services:
     app:
         build:
             context: ./backend
-            dockerfile: /home/p2065/laravelprojeler/laravel9-login-api-example/backend/docker/php/Dockerfile
+            dockerfile: ./docker/php/Dockerfile
         image: php:8.1.3-fpm
         container_name: app
         restart: unless-stopped

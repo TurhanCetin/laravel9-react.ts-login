@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+echo "► Installing App dependencies ... "
+npm i
+
+# Run custom ad-hoc pre-run script
+echo "► Starting App ... "
+npm start
