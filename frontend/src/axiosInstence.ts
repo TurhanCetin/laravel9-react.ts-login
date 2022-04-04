@@ -1,29 +1,29 @@
-import axios from 'axios'
+// import axios from 'axios'
 
-const baseURL = 'http://localhost/api/';
-let axiosInstence = axios.create({
-    baseURL
-})
+// const baseURL = 'http://localhost/api/';
+// let axiosInstence = axios.create({
+//     baseURL
+// })
 
-axiosInstence.interceptors.request.use((config)=> {
-    console.log(config);
+// axiosInstence.interceptors.request.use((config)=> {
+//     console.log(config);
     
-    return config
-}, err => {
-    console.log(err);
+//     return config
+// }, err => {
+//     console.log(err);
     
-    return Promise.reject(err)
-})
+//     return Promise.reject(err)
+// })
 
-axiosInstence.interceptors.response.use((res) => {
-    console.log(res);
+// axiosInstence.interceptors.response.use((res) => {
+//     console.log(res);
 
-    return res
-}, err=> {
+//     return res
+// }, err=> {
 
     
-    console.log(err);
-    return Promise.reject(err)
-})
+//     console.log(err);
+//     return Promise.reject(err)
+// })
 
-export default axiosInstence
+// export default axiosInstence

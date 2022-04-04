@@ -1,25 +1,47 @@
 import React from "react";
 import { Input,Button,Form,Checkbox } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const SignUp = () => {
 
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-      };
-    
-      const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-      };
+    const baseUrl = 'http://localhost/api/';
+    const csrfBaseUrl = 'http://localhost/';
+    const navigate = useNavigate();
 
+    const onFinish = (e:React.FormEvent<HTMLFormElement>) => {
+        axios.defaults.withCredentials = true; 
+        axios.get(csrfBaseUrl + 'sanctum/csrf-cookie').then(response => {
+            axios.post(baseUrl + 'user/register',e).then(res => {
+                if(res.status === 201){
+                    Swal.fire({
+                        title:"Congratulations",
+                        icon:"success",
+                        text:"Register Successfully",
+                        timer: 2000,
+                    })
+                    navigate("/welcome");  
+                }else{
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Email or password is incorrect',
+                        icon: 'error',
+                        confirmButtonText:'Try Again',
+                    });
+                }
+            })
+        })
+    };
+    
     return(
         <Form 
             id="loginForm"
             name="login_form"
             initialValues={{ remember: true }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             >
             <Form.Item
@@ -53,7 +75,7 @@ const SignUp = () => {
 
             <Form.Item
             label="Password Again"
-            name="passwordAgain"
+            name="password_confirmation"
             rules={[{ required: true, message: 'Please input your password!' }]}
             wrapperCol={{ offset:1, span: 24 }}
             >

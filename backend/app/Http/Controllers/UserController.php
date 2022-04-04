@@ -115,18 +115,17 @@ class UserController extends Controller
         if(!$user || $request->password_ != $user->password) {
 
             //ilk hali buydu 401'reactda istediğimizi alamıyoruz buna bakılacak
-            return new JsonResponse([
-                "message" => "Bad Creds"
-            ],401);
+            // return new JsonResponse([
+            //     "message" => "Bad Creds"
+            // ],401);
 
-            // şuanda çalışıyor react'da istediğimiz ancam 200 yanlış bir http'i kodu olur.
-            // $response=[
-            //     'message'=>'Bad Creds',
-            // ];
+            // şuanda çalışıyor react'da istediğimiz ancak 200 yanlış bir http'i kodu olur.
+            $response=[
+                'message'=>'Bad Creds',
+            ];
 
-            // return response($response,200);
+            return response($response,200);
         }
-
 
         $token = $user->createToken('myappToken')->plainTextToken;
 
