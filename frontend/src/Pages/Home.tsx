@@ -1,28 +1,56 @@
+import React, { useEffect } from "react";
 import { Breadcrumb, Button, Menu } from "antd";
 import { Content, Header } from "antd/lib/layout/layout";
+import Swal from "sweetalert2";
 import axios from "axios";
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    const navigate = useNavigate();
 
-    const baseUrl = 'http://localhost/api/';
+    const token = localStorage.getItem('auth_token');
     const csrfBaseUrl = 'http://localhost/';
+    const instance = axios.create({
+        baseURL: 'http://localhost/api/',
+        headers: {'Authorization': 'Bearer '+token}
+    });
 
         const logOut = () => {
-            axios.defaults.withCredentials = true; 
-            /**
-             * Todo
-             * Login olunca alınan Tokeni buraya parametre olarak yollamamzı gerekiyor
-             * 
-             */
+            axios.defaults.withCredentials = true;
             axios.get(csrfBaseUrl + 'sanctum/csrf-cookie').then(response => {
-                axios.post(baseUrl + 'user/logout').then(res => {
-                    console.log(res);
+                instance.post('user/logout').then(res => {
+                    Swal.fire({
+                        title:"Congratulations",
+                        icon:"success",
+                        text:"Log out Successfully",
+                        timer: 2000,
+                    })
+                    navigate("/welcome");
+                    localStorage.clear();
                 }).catch(err => {
                     console.log(err);
+                    Swal.fire({
+                        title:"Error",
+                        icon:"error",
+                        text:"Couldn't log out for some reason",
+                        timer: 2000,
+                    })
                 })
             })
-        }   
+        } 
+
+        /**
+         * ! useEffect asenkron işlemlerden sonra kullanılmalıdır o yüzden alta aldık
+         */
+        
+    useEffect(() => {
+        const token = localStorage.getItem("auth_token");
+        if (token == null){
+            navigate("/welcome");
+        }else {
+            navigate("/");
+        }
+    },[navigate])
 
     return(
         <Header>

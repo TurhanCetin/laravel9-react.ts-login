@@ -120,21 +120,20 @@ class UserController extends Controller
             // ],401);
 
             // şuanda çalışıyor react'da istediğimiz ancak 200 yanlış bir http'i kodu olur.
-            $response=[
-                'message'=>'Bad Creds',
-            ];
-
-            return response($response,200);
+            return response()->json([
+                'status'=>401,
+                'message' => 'Bad Creds!',
+            ]);
         }
 
         $token = $user->createToken('myappToken')->plainTextToken;
 
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
 
-        return response($response,201);
+            return response()->json([
+                'status'=>201,
+                'user'=> $user,
+                'token'=> $token,
+            ]);
     }
 
     public function logout (Request $request) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Input,Button,Form,Checkbox } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,8 @@ const Login = () => {
         axios.get(csrfBaseUrl + 'sanctum/csrf-cookie').then(response => {
             //ardından login işlemini burada gerçekleştireceğiz.
             axios.post(baseUrl + 'login', e).then(res => {
-                if(res.status === 201){
+                localStorage.setItem("auth_token", res.data.token );
+                if(res.data.status === 201){
                     Swal.fire({
                         title:"Welcome",
                         icon:"success",
@@ -26,7 +27,7 @@ const Login = () => {
                         timer: 2000,
                     })
                     navigate("/");  
-                }else{
+                }else if (res.data.status === 401) {
                     Swal.fire({
                         title: 'Error!',
                         text: 'Email or password is incorrect',
@@ -37,32 +38,16 @@ const Login = () => {
                 }
             }) 
         })
-        /**
-         * ! bu seferde 419 hatasında kalıyoruz;
-        try {
-            await axiosinstence.get( csrfBaseUrl + 'sanctum/csrf-cookie')
-            await axiosinstence.post(baseUrl + 'login', e)
-            Swal.fire({
-                    title:"Welcome",
-                    icon:"success",
-                    text:"Login Successfully",
-                    timer: 2000,
-                })
-                navigate("/");  
-                console.log("yukardaki çalıştı");
-                
-        } catch(err) {
-            console.log('err from catch', err);
-            
-            Swal.fire({
-                title: 'Error!',
-                text: 'Email or password is incorrect',
-                icon: 'error',
-                confirmButtonText:'Try Again',
-            });
-        }
-        */
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem("auth_token");
+        if (token == null){
+            navigate("/welcome");
+        }else {
+            navigate("/");
+        }
+    },[navigate]);
 
     return(
         <Form 
