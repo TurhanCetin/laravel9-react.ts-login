@@ -7,6 +7,10 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## laravel9-login-api-with-docker
+Laravel ile login api'ın aynı dizin içerisinde farklı iki proje şeklinde React ile yazılmıştır. Laravel ve React projesi tek Docker-compose ile dockerize edilmiştir.
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
@@ -25,5 +29,3 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## laravel9-login-api-with-docker
-Laravel ile login api'ın aynı dizin içerisinde farklı iki proje şeklinde React ile yazılmıştır. Laravel ve React projesi tek Docker-compose ile dockerize edilmiştir.
